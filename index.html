@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Findbox</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="common.css">
 </head>
 <body>
     <div class="container">
@@ -14,9 +14,20 @@
         	<input id="game-title-input" type="text" placeholder="What is this game?">
     	</div>
     	<div class="row">
-        	<button type="button" onclick="mysubmit()">Submit</button>
+        	<button type="button" onclick="submit()">Submit</button>
     	</div>
     </div>
-	<script src="index.js"></script>
+	<script src="common.js"></script>
+	<script>
+		let gameTitle = document.getElementById('game-title-input');
+
+		function submit() {
+			if (gameTitle.value.toLowerCase() === 'findbox') {
+				updateMessage('Brilliant! So let find some boxes.')
+			} else {
+				updateMessage('Oh, no!')
+			}
+		}
+	</script>
 </body>
 </html>
