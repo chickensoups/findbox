@@ -5,10 +5,18 @@
     <title>Findbox</title>
     <link rel="stylesheet" type="text/css" href="common.css">
     <style>
-        #the-box {
-            position: absolute;
-            width: 70px;
-            top: 50%;
+        .item {
+            width: 100px;
+            height: 100px;
+            border: 1px solid gray;
+            border-radius: 10%;
+        }
+
+        .switch {
+            color: white;
+            font-weight: bold;
+            border-radius: 5%;
+            border: 1px white solid;
         }
     </style>
 </head>
@@ -18,14 +26,24 @@
         <label id="level-name">Cửa số 7</label>
     </div>
     <div class="row">
-        <label id="requirements">Tìm chiếc hộp!</label>
+        <label id="requirements">Tìm 3 hộp!</label>
     </div>
     <div class="row">
         <label id="message"></label>
     </div>
     <div class="row  main-content">
-        <!-- The main level content here -->
-        <img id="the-box" onclick="clickOnTheBox()" src="resources/finbox-blue.png" alt="the box">
+        <div id="item-picker-1" class="row item-picker">
+            <img id="item-1" class="item" src="resources/fruit-2.png">
+            <button id="switch-1" class="switch" onclick="runItemPicker1()" type="button">Start</button>
+        </div>
+        <div id="item-picker-2" class="row item-picker">
+            <img id="item-2" class="item" src="resources/fruit-4.png">
+            <button id="switch-2" class="switch" onclick="runItemPicker2()" type="button">Start</button>
+        </div>
+        <div id="item-picker-3" class="row item-picker">
+            <img id="item-3" class="item" src="resources/fruit-6.png">
+            <button id="switch-3" class="switch" onclick="runItemPicker3()" type="button">Start</button>
+        </div>
     </div>
     <div class="row">
         <button id="next-level-btn" type="button" onclick="nextLevel('level_07')">>> Cửa tiếp</button>
@@ -33,36 +51,91 @@
 </div>
 <script src="common.js"></script>
 <script>
-  let theBox = document.getElementById('the-box');
+  let item1 = document.getElementById('item-1');
+  let switch1 = document.getElementById('switch-1');
+  switch1.style.backgroundColor = 'green';
+  let interval1;
 
-  addEventListener('mousemove', track, false);
-  const defaultDistance = 105;
+  let item2 = document.getElementById('item-2');
+  let switch2 = document.getElementById('switch-2');
+  switch2.style.backgroundColor = 'green';
+  let interval2;
 
-  function track(e) {
-    let mouseP = {x: e.pageX, y: e.pageY};
-    let boxB = theBox.getBoundingClientRect();
-    let vMouseBox = {x: boxB.x - mouseP.x, y: boxB.y - mouseP.y};
-    let distance = Math.hypot(vMouseBox.x, vMouseBox.y)
-    if (distance < defaultDistance) {
-      let distanceRatio = defaultDistance / distance;
-      console.log('distance ratio', distanceRatio)
-      let boxNewX = (1 - distanceRatio) * mouseP.x + distanceRatio * boxB.x;
-      let boxNewY = (1 - distanceRatio) * mouseP.y + distanceRatio * boxB.y;
-      if (boxNewX < 0) {
-        boxNewX = 0;
-      }
-      if (boxNewY < 0) {
-        boxNewY = 0;
-      }
-      console.log(boxNewX, boxNewY)
-      theBox.style.left = boxNewX + 'px';
-      theBox.style.top = boxNewY + 'px';
+  let item3 = document.getElementById('item-3');
+  let switch3 = document.getElementById('switch-3');
+  switch3.style.backgroundColor = 'green';
+  let interval3;
+
+  function runItemPicker1() {
+    const images = ['resources/fruit-0.png', 'resources/fruit-1.png', 'resources/fruit-2.png', 'resources/fruit-3.png',
+      'resources/fruit-4.png', 'resources/fruit-5.png', 'resources/fruit-6.png', 'resources/fruit-7.png',]
+    let imgIndex = 1;
+    if (switch1.innerText === 'Start') {
+      // Start the picker
+      switch1.innerText = 'Stop';
+      switch1.style.backgroundColor = 'red';
+      interval1 = setInterval(() => {
+        imgIndex = imgIndex % images.length;
+        item1.setAttribute('src', images[imgIndex++])
+      }, 1000)
+    } else {
+      // Stop the picker
+      clearInterval(interval1);
+      switch1.innerText = 'Start';
+      switch1.style.backgroundColor = 'green';
+      checkResult();
     }
   }
 
-  function clickOnTheBox() {
-    updateMessage('Đuổi hay lắm, hãy đến với cửa số 7!', MSG_SUCCESS);
-    showTheNextLevelButton();
+  function runItemPicker2() {
+    const images = ['resources/fruit-0.png', 'resources/fruit-1.png', 'resources/fruit-2.png', 'resources/fruit-3.png',
+      'resources/fruit-4.png', 'resources/fruit-5.png', 'resources/fruit-6.png', 'resources/fruit-7.png',]
+    let imgIndex = 4;
+    if (switch2.innerText === 'Start') {
+      // Start the picker
+      switch2.innerText = 'Stop';
+      switch2.style.backgroundColor = 'red';
+      interval2 = setInterval(() => {
+        imgIndex = imgIndex % images.length;
+        item2.setAttribute('src', images[imgIndex++])
+      }, 100)
+    } else {
+      // Stop the picker
+      clearInterval(interval2);
+      switch2.innerText = 'Start';
+      switch2.style.backgroundColor = 'green';
+      checkResult();
+    }
+  }
+
+  function runItemPicker3() {
+    const images = ['resources/fruit-0.png', 'resources/fruit-1.png', 'resources/fruit-2.png', 'resources/fruit-3.png',
+      'resources/fruit-4.png', 'resources/fruit-5.png', 'resources/fruit-6.png', 'resources/fruit-7.png','resources/fruit-1.png', 'resources/fruit-0.png', 'resources/fruit-2.png', 'resources/fruit-3.png',
+      'resources/fruit-4.png', 'resources/fruit-5.png', 'resources/fruit-6.png', 'resources/fruit-7.png']
+    let imgIndex = 6;
+    if (switch3.innerText === 'Start') {
+      // Start the picker
+      switch3.innerText = 'Stop';
+      switch3.style.backgroundColor = 'red';
+      interval3 = setInterval(() => {
+        imgIndex = imgIndex % images.length;
+        item3.setAttribute('src', images[imgIndex++])
+      }, 10)
+    } else {
+      // Stop the picker
+      clearInterval(interval3);
+      switch3.innerText = 'Start';
+      switch3.style.backgroundColor = 'green';
+      checkResult();
+    }
+  }
+
+  function checkResult() {
+    const finboxImg = 'resources/fruit-0.png';
+    if (item1.getAttribute('src') === finboxImg && item2.getAttribute('src') === finboxImg && item3.getAttribute('src') === finboxImg) {
+      updateMessage('Bạn thật là may mắn!', MSG_SUCCESS);
+      showTheNextLevelButton();
+    }
   }
 </script>
 </body>

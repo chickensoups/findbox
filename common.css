@@ -18,3 +18,14 @@
 #next-level-btn {
     display: none;
 }
+
+#requirements {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#level-name {
+    font-weight: bold;
+    font-size: 2em;
+    color: #16447f;
+}
