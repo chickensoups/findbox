@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Findbox</title>
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <style>
+        #the-box {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <label id="level-name">Cửa số 1</label>
+    </div>
+    <div class="row">
+        <label id="requirements">Hãy tìm 1 chiếc hộp trên màn hình</label>
+    </div>
+    <div class="row">
+        <label id="message"></label>
+    </div>
+    <div class="row main-content">
+        <img id="the-box" onclick="clickOnTheBox()" src="resources/finbox-blue.png" alt="the box">
+    </div>
+    <div class="row">
+        <button id="next-level-btn" type="button" onclick="nextLevel('level_02')">>> Cửa tiếp</button>
+    </div>
+</div>
+<script src="common.js"></script>
+<script>
+  function clickOnTheBox() {
+    let theBox = document.getElementById('the-box');
+    updateMessage('Quá dễ đối với bạn!', MSG_SUCCESS);
+    showTheNextLevelButton();
+  }
+</script>
+</body>
+</html>

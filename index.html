@@ -7,15 +7,24 @@
 </head>
 <body>
     <div class="container">
+		<div class="row">
+			<label id="level-name">Cửa số 0</label>
+		</div>
+		<div class="row">
+			<label id="requirements">Game này tên là gì?</label>
+		</div>
     	<div class="row">
     		<label id="message"></label>
     	</div>
     	<div class="row">
-        	<input id="game-title-input" type="text" placeholder="What is this game?">
+        	<input id="game-title-input" type="text" placeholder="Hãy nhập tên game">
     	</div>
-    	<div class="row">
+    	<div class="row main-content">
         	<button type="button" onclick="submit()">Submit</button>
     	</div>
+		<div class="row">
+			<button id="next-level-btn" type="button" onclick="nextLevel('level_01')">>> Cửa tiếp</button>
+		</div>
     </div>
 	<script src="common.js"></script>
 	<script>
@@ -23,9 +32,10 @@
 
 		function submit() {
 			if (gameTitle.value.toLowerCase() === 'findbox') {
-				updateMessage('Brilliant! So let find some boxes.')
+				updateMessage('Tuyệt vời! Đi tìm vài cái hộp thôi.', MSG_SUCCESS);
+				showTheNextLevelButton();
 			} else {
-				updateMessage('Oh, no!')
+				updateMessage('Oh, no. Chưa chính xác!', 'fail', MSG_FAIL);
 			}
 		}
 	</script>
