@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <title>Findbox</title>
     <link rel="stylesheet" type="text/css" href="common.css">
+	<style>
+		#introduction {
+			font-weight: bold;
+			font-size: 1.5em;
+		}
+		#program-name {
+			font-weight: bolder;
+			font-style: italic;
+		}
+	</style>
 </head>
 <body>
     <div class="container">
+		<div class="row" id="introduction">
+			<label>Một sản phẩm dự thi chương trình </label><label id="program-name">"Finbox trong tôi là..."</label>
+		</div>
 		<div class="row">
 			<label id="level-name">Cửa số 0</label>
 		</div>
@@ -20,7 +33,7 @@
         	<input id="game-title-input" type="text" placeholder="Hãy nhập tên game">
     	</div>
     	<div class="row main-content">
-        	<button type="button" onclick="submit()">Submit</button>
+        	<button type="button" onclick="submit()">Tôi chắc chắn</button>
     	</div>
 		<div class="row">
 			<button id="next-level-btn" type="button" onclick="nextLevel('level_01')">>> Cửa tiếp</button>
