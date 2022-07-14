@@ -16,12 +16,13 @@
         .main-content {
             display: block;
             width: 80%;
-            position: relative;
             margin: auto;
         }
 
         .main-content .titles {
             display: block;
+            height: 2500px;
+            border: 1px solid gray;
         }
 
         .title {
@@ -49,6 +50,9 @@
     </div>
     <div class="row">
         <label id="message"></label>
+    </div>
+    <div class="row">
+        <button id="next-level-btn" type="button" onclick="nextLevel('level_06')">>> Cửa tiếp</button>
     </div>
     <div class="title">
         <img id="the-box" onclick="clickOnTheBox()" src="resources/finbox-blue.png" alt="the box">
@@ -490,13 +494,9 @@
             <div class="title"><img src="resources/fintext-fin.png" alt=""></div>
         </div>
     </div>
-    <div class="row">
-        <button id="next-level-btn" type="button" onclick="nextLevel('level_05')">>> Cửa tiếp</button>
-    </div>
 </div>
 <script src="common.js"></script>
 <script>
-  let theBox = document.getElementById('the-box');
   let titles = document.getElementsByClassName('title');
   for (let title of titles) {
     title.addEventListener('mouseover', () => {

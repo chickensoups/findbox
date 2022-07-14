@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Findbox</title>
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <style>
+        #the-box {
+            position: absolute;
+            width: 70px;
+            top: 50%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <label id="level-name">Cửa số 7</label>
+    </div>
+    <div class="row">
+        <label id="requirements">Tìm chiếc hộp!</label>
+    </div>
+    <div class="row">
+        <label id="message"></label>
+    </div>
+    <div class="row  main-content">
+        <!-- The main level content here -->
+        <img id="the-box" onclick="clickOnTheBox()" src="resources/finbox-blue.png" alt="the box">
+    </div>
+    <div class="row">
+        <button id="next-level-btn" type="button" onclick="nextLevel('level_07')">>> Cửa tiếp</button>
+    </div>
+</div>
+<script src="common.js"></script>
+<script>
+  let theBox = document.getElementById('the-box');
+
+  addEventListener('mousemove', track, false);
+  const defaultDistance = 105;
+
+  function track(e) {
+    let mouseP = {x: e.pageX, y: e.pageY};
+    let boxB = theBox.getBoundingClientRect();
+    let vMouseBox = {x: boxB.x - mouseP.x, y: boxB.y - mouseP.y};
+    let distance = Math.hypot(vMouseBox.x, vMouseBox.y)
+    if (distance < defaultDistance) {
+      let distanceRatio = defaultDistance / distance;
+      console.log('distance ratio', distanceRatio)
+      let boxNewX = (1 - distanceRatio) * mouseP.x + distanceRatio * boxB.x;
+      let boxNewY = (1 - distanceRatio) * mouseP.y + distanceRatio * boxB.y;
+      if (boxNewX < 0) {
+        boxNewX = 0;
+      }
+      if (boxNewY < 0) {
+        boxNewY = 0;
+      }
+      console.log(boxNewX, boxNewY)
+      theBox.style.left = boxNewX + 'px';
+      theBox.style.top = boxNewY + 'px';
+    }
+  }
+
+  function clickOnTheBox() {
+    updateMessage('Đuổi hay lắm, hãy đến với cửa số 7!', MSG_SUCCESS);
+    showTheNextLevelButton();
+  }
+</script>
+</body>
+</html>
